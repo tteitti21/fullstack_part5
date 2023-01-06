@@ -45,11 +45,16 @@ const App = () => {
         'loggedInUser', JSON.stringify(user)
       )
       setUser(user)
-      blogs.setToken(user.token)
+      blogService.setToken(user.token)
       setUsername('')
       setPassword('')
+      setNotificationMessage('Logged in')
+      setTimeout(() => {
+        setNotificationMessage(null)
+      }, 3000)
+
     } catch (exception) {
-      setNotificationMessage('Wrong credentials')
+      setNotificationMessage('Wrong username or password')
       setTimeout(() => {
         setNotificationMessage(null)
       }, 3000)
@@ -77,7 +82,7 @@ const App = () => {
   if (response) {
     const refreshBlogs = await blogService.getAll()
     setBlogs(refreshBlogs)
-    setNotificationMessage('new blog created')
+    setNotificationMessage('New blog created')
     setTimeout(() => {
       setNotificationMessage(null)
     }, 3000)
