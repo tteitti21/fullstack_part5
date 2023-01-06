@@ -6,6 +6,7 @@ import LoginForm from './components/LoginForm'
 import ShowBlogs from './components/ShowBlogs'
 import Blog from './components/Blog'
 import LogoutButton from './components/LogoutButton'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -13,6 +14,9 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
+  const [title, setTitle] = useState('') 
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -25,7 +29,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      //noteService.setToken(user.token)
+      blogService.setToken(user.token)
     }
   }, [])
 
@@ -41,6 +45,7 @@ const App = () => {
         'loggedInUser', JSON.stringify(user)
       )
       setUser(user)
+      blogs.setToken(user.token)
       setUsername('')
       setPassword('')
     } catch (exception) {
@@ -62,14 +67,36 @@ const App = () => {
   }, 3000)
  }
 
+ const handlePost = async (event) => {
+  event.preventDefault()
+  
+  const formData = new FormData(event.target)
+  const newBlog = Object.fromEntries(formData)
+  const response = blogService.postBlog(newBlog)
+
+  if (response) {
+    const refreshBlogs = await blogService.getAll()
+    setBlogs(refreshBlogs)
+    setNotificationMessage('new blog created')
+    setTimeout(() => {
+      setNotificationMessage(null)
+    }, 3000)
+  }
+ }
+
   return (
     <div>
       <NotificationMessage message={notificationMessage}/>
       {user !== null ?
         <ShowBlogs user={user} blogs={blogs} Blog={Blog} 
-        LogoutButton={<LogoutButton handleLogout={handleLogout}/>}/> :
+        LogoutButton={<LogoutButton handleLogout={handleLogout}/>}
+        createBlog={<BlogForm handlePost={handlePost} title={title} author={author} url={url} 
+        setTitle={setTitle} setAuthor={setAuthor} setUrl={setUrl}/>}
+        /> 
+        :
         <LoginForm handleLogin={handleLogin} username={username} password={password}
-        setUsername={setUsername} setPassword={setPassword}/>
+        setUsername={setUsername} setPassword={setPassword}
+        />
       }
     </div>
   )

@@ -1,4 +1,4 @@
-const ShowBlogs = ({user, blogs, Blog, LogoutButton}) => {
+const ShowBlogs = ({user, blogs, Blog, LogoutButton, createBlog}) => {
     return (
       <div>
       <h2>blogs</h2>
@@ -12,6 +12,7 @@ const ShowBlogs = ({user, blogs, Blog, LogoutButton}) => {
                 </li>
             )}
         </ul>
+        {createBlog}
       </div>
     )
 }
