@@ -1,8 +1,9 @@
-const ShowBlogs = ({user, blogs, Blog}) => {
+const ShowBlogs = ({user, blogs, Blog, LogoutButton}) => {
     return (
       <div>
       <h2>blogs</h2>
-      <p>{user.name} logged-in</p>
+      <p>Currenty logged in as {user.name}: {LogoutButton}</p>
+      
       <p>All blogs:</p>
         <ul>
             {blogs.map( blog =>
