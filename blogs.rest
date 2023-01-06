@@ -1,0 +1,59 @@
+
+###
+GET http://localhost:3001/api/blogs
+
+###
+GET http://localhost:3001
+
+###
+GET http://localhost:3001/api/users/
+
+
+###
+POST http://localhost:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+
+{
+    "title": "New blog with ID",
+    "author": "Tino T",
+    "url": "https://www.siteOfSites.com/blogs",
+    "likes": 200,
+    "user": "63b6bd975b7dba1535ba75c7"
+}
+
+###
+POST http://localhost:3001/api/users/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "TMT",
+    "name": "Tino",
+    "password": "salainensana"
+}
+
+###
+POST http://localhost:3001/api/login/ HTTP/1.1
+content-type: application/json
+
+{
+    "username": "TMT",
+    "password": "salainensana"
+}
+
+###
+DELETE http://localhost:3001/api/blogs/63b723593f027ccefbf6a160
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRNVCIsImlkIjoiNjNiNzIxMzE3NWRkODY1ZGI4ODc5NGI4IiwiaWF0IjoxNjcyOTQ2Mjg5fQ.datAwCloPmzxy6Uc6n4uo8l61dXl_zqGejvJ2NfSuYs
+//Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRNVFdST05HIiwiaWQiOiI2M2I3MjZiZjY0ZWRiNDBkMmZjNjE2M2IiLCJpYXQiOjE2NzI5NDc0MDZ9.CxZa26yfvGQbd0fvOZ3pMivdaLH-emwac-qzGS6nU6I
+
+###
+POST http://localhost:3001/api/blogs/ HTTP/1.1
+content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRNVCIsImlkIjoiNjNiNzIxMzE3NWRkODY1ZGI4ODc5NGI4IiwiaWF0IjoxNjcyOTQ2Mjg5fQ.datAwCloPmzxy6Uc6n4uo8l61dXl_zqGejvJ2NfSuYs
+//Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRNVFdST05HIiwiaWQiOiI2M2I3MjZiZjY0ZWRiNDBkMmZjNjE2M2IiLCJpYXQiOjE2NzI5NDc0MDZ9.CxZa26yfvGQbd0fvOZ3pMivdaLH-emwac-qzGS6nU6I
+{
+    "title": "New blog with ID",
+    "author": "Tino T",
+    "url": "https://www.siteOfSites.com/blogs",
+    "likes": 200,
+    "user": "63b7213175dd865db88794b8"
+}
