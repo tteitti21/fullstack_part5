@@ -7,6 +7,7 @@ import ShowBlogs from './components/ShowBlogs'
 import Blog from './components/Blog'
 import LogoutButton from './components/LogoutButton'
 import BlogForm from './components/BlogForm'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -14,9 +15,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
-  const [title, setTitle] = useState('') 
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -94,15 +93,15 @@ const App = () => {
       <NotificationMessage message={notificationMessage}/>
       {user !== null ?
         <ShowBlogs user={user} blogs={blogs} Blog={Blog} 
-        LogoutButton={<LogoutButton handleLogout={handleLogout}/>}
-        createBlog={<BlogForm handlePost={handlePost} title={title} author={author} url={url} 
-        setTitle={setTitle} setAuthor={setAuthor} setUrl={setUrl}/>}
-        /> 
+          LogoutButton={<LogoutButton handleLogout={handleLogout}/>}
+          createBlog={<BlogForm handlePost={handlePost}/>}
+          Togglable={Togglable}
+        />
         :
         <LoginForm handleLogin={handleLogin} username={username} password={password}
-        setUsername={setUsername} setPassword={setPassword}
+          setUsername={setUsername} setPassword={setPassword}
         />
-      }
+        }
     </div>
   )
 }

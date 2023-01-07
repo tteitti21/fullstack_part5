@@ -1,4 +1,10 @@
-const BlogForm = ({handlePost, title, author, url, setTitle, setAuthor, setUrl}) => {
+import { useState } from 'react'
+
+const BlogForm = ({handlePost}) => {
+    const [title, setTitle] = useState('') 
+    const [author, setAuthor] = useState('')
+    const [url, setUrl] = useState('')
+
     return (
     <form onSubmit={handlePost}>
         <h2>Create new blog</h2>

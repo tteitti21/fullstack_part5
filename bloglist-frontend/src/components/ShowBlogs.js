@@ -1,4 +1,4 @@
-const ShowBlogs = ({user, blogs, Blog, LogoutButton, createBlog}) => {
+const ShowBlogs = ({user, blogs, Blog, LogoutButton, createBlog, Togglable}) => {
     return (
       <div>
       <h2>blogs</h2>
@@ -6,13 +6,15 @@ const ShowBlogs = ({user, blogs, Blog, LogoutButton, createBlog}) => {
       
       <p>All blogs:</p>
         <ul>
-            {blogs.map( blog =>
-                <li key={blog.id} style={{padding:'2%'}}>
-                    <Blog key={blog.id} blog={blog} />
-                </li>
-            )}
-        </ul>
-        {createBlog}
+          {blogs.map( blog =>
+            <li key={blog.id} style={{padding:'2%'}}>
+              <Blog key={blog.id} blog={blog} />
+            </li>
+          )}
+        </ul> 
+        <Togglable buttonLabel='new blog'>
+          {createBlog}
+        </Togglable>
       </div>
     )
 }
