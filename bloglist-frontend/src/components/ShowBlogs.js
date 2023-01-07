@@ -1,4 +1,11 @@
-const ShowBlogs = ({user, blogs, Blog, LogoutButton, createBlog, Togglable}) => {
+import Button from './Button'
+
+const ShowBlogs = ({
+  user, blogs, Blog, handleLogout, 
+  createBlog, Togglable,
+  handleLike 
+  }) => {
+
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 5,
@@ -9,15 +16,14 @@ const ShowBlogs = ({user, blogs, Blog, LogoutButton, createBlog, Togglable}) => 
     return (
       <div>
       <h2>blogs</h2>
-      <p>Currenty logged in as {user.name}: {LogoutButton}</p>
-      
+      <p>Currenty logged in as {user.name}: <Button handler={handleLogout} text='logout'/></p>
       <p>All blogs:</p>
         <ul>
           {blogs.map( blog =>
             <li key={blog.id} style={blogStyle}>
               <div>
               <Togglable buttonLabel='view' title={blog.title}>
-                <Blog key={blog.id} blog={blog} Togglable={Togglable}/>
+                <Blog key={blog.id} blog={blog} handleLike={handleLike}/>
               </Togglable>
               </div>
             </li>
