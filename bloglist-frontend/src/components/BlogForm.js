@@ -37,7 +37,7 @@ const BlogForm = ({handlePost}) => {
         </div>
         <button type="submit">create</button>
     </form>
-    )
+  )
 }
 
 export default BlogForm
