@@ -3,7 +3,9 @@ import Button from './Button'
 const ShowBlogs = ({
   user, blogs, Blog, handleLogout, 
   createBlog, Togglable,
-  handleLike 
+  handleLike,
+  handleRemove,
+  userID,
   }) => {
   const blogStyle = {
     paddingTop: 10,
@@ -25,7 +27,8 @@ const ShowBlogs = ({
             <li key={blog.id} style={blogStyle}>
               <div>
               <Togglable buttonLabel='view' title={blog.title}>
-                <Blog key={blog.id} blog={blog} handleLike={handleLike}/>
+                <Blog key={blog.id} blog={blog} handleLike={handleLike} 
+                handleRemove={handleRemove} userID={userID}/>
               </Togglable>
               </div>
             </li>

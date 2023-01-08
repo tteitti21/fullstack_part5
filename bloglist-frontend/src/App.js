@@ -30,6 +30,7 @@ const App = () => {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
       blogService.setToken(user.token)
+      console.log(user)
     }
   }, [])
 
@@ -111,6 +112,24 @@ const App = () => {
     } 
  }
 
+   /** Handler for DELETE */
+   const handleRemove = async (event) => {
+    event.preventDefault()
+    const blog = blogs.filter(blog => blog.id === event.target.value)
+    if (window.confirm(`Delete blog ${blog[0].title} ?`)) {
+    try {
+      const response = blogService.deleteBlog(blog[0])
+      if (response) {
+        const refreshBlogs = await blogService.getAll()
+        setBlogs(refreshBlogs)
+        notificationHandler('blog has been deleted', true)
+      } 
+    } catch (error) {
+      notificationHandler('failed to delete blog', false)
+    }
+  }
+ }
+
   return (
     <div>
       <NotificationMessage message={notificationMessage} type={messageType}/>
@@ -118,8 +137,10 @@ const App = () => {
         <ShowBlogs user={user} blogs={blogs} Blog={Blog} 
           handleLogout={handleLogout}
           handleLike={handleLike}
+          handleRemove={handleRemove}
           createBlog={<BlogForm handlePost={handlePost}/>}
           Togglable={Togglable}
+          userID={user.id}
         />
         :
         <LoginForm handleLogin={handleLogin} username={username} password={password}
