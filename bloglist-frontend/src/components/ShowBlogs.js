@@ -1,4 +1,5 @@
 import Button from './Button'
+import PropTypes from 'prop-types'
 
 const ShowBlogs = ({
   user, blogs, Blog, handleLogout, 
@@ -39,6 +40,18 @@ const ShowBlogs = ({
         </Togglable>
       </div>
     )
+}
+
+ShowBlogs.propTypes = {
+  user: PropTypes.object.isRequired, 
+  blogs: PropTypes.array.isRequired, 
+  Blog: PropTypes.elementType.isRequired, 
+  handleLogout: PropTypes.func.isRequired, 
+  createBlog: PropTypes.node.isRequired, 
+  Togglable: PropTypes.elementType.isRequired,
+  handleLike: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
+  userID: PropTypes.string.isRequired,
 }
 
 export default ShowBlogs
