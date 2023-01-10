@@ -32,7 +32,7 @@ const NotificationMessage = ({ message, type=false }) => {
     }
     else {
       return (
-        <div style={failStyle}>
+        <div className="error" style={failStyle}>
           {message}
         </div>
       )
