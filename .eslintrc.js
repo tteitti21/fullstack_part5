@@ -16,6 +16,9 @@ module.exports = {
       'error',
       2
     ],
+    "testing-library/no-node-access": [
+      "error", {"allowContainerFirstChild": true}
+    ],
     'linebreak-style': [
       'error',
       'windows'
