@@ -1,5 +1,5 @@
-const NotificationMessage = ({ message, type=false }) => {
-  
+const NotificationMessage = ({ message, type = false }) => {
+
   const failStyle = {
     color: 'red',
     background: 'lightgrey',
@@ -8,7 +8,7 @@ const NotificationMessage = ({ message, type=false }) => {
     borderRadius: '5px',
     padding: '10px',
     marginBottom: '10px',
-    }
+  }
 
   const successStyle = {
     color: 'green',
@@ -18,25 +18,25 @@ const NotificationMessage = ({ message, type=false }) => {
     borderRadius: '5px',
     padding: '10px',
     marginBottom: '10px',
-    }
-
-    if (message === null) {
-      return null
-    }
-    else if (type) {
-      return (
-        <div style={successStyle}>
-          {message}
-        </div>
-      )
-    }
-    else {
-      return (
-        <div className="error" style={failStyle}>
-          {message}
-        </div>
-      )
-    }
   }
+
+  if (message === null) {
+    return null
+  }
+  else if (type) {
+    return (
+      <div style={successStyle}>
+        {message}
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className="error" style={failStyle}>
+        {message}
+      </div>
+    )
+  }
+}
 
 export default NotificationMessage
