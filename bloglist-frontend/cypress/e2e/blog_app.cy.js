@@ -112,7 +112,7 @@ describe('Blog app', function () {
       .should('not.contain', 'new title')
     })
 
-    it.only('User can NOT delete others blog', function() {
+    it('User can NOT delete others blog', function() {
       cy.createBlog({
         title: 'new title',
         author: 'best author',
@@ -132,6 +132,43 @@ describe('Blog app', function () {
       .should('contain', 'new title')
       .get('#remove-button')
       .and('have.css', 'display', 'none')
+    })
+
+    it.only('Order by highest like-value first', function() {
+      cy.createBlog({
+        title: 'last',
+        author: 'best author',
+        url: 'shady url',
+        likes: 1
+      })
+      cy.createBlog({
+        title: 'middle',
+        author: 'best author',
+        url: 'shady url',
+        likes: 2
+      })
+      cy.createBlog({
+        title: 'first',
+        author: 'best author',
+        url: 'shady url',
+        likes: 3
+      })
+
+      cy.get('.li').eq(0).contains('view').click()
+      cy.get('.li').eq(1).contains('view').click()
+      cy.get('.li').eq(2).contains('view').click()
+
+      cy.get('.li').eq(2).contains('like').click()
+      cy.get('.li').eq(0).contains('like').click()
+
+      cy.get('.li').eq(2).contains('like').click()
+
+      cy.get('.li').eq(0)
+      .should('contain', 2)
+      cy.get('.li').eq(1)
+      .should('contain', 1)
+      cy.get('.li').eq(2)
+      .should('contain', 0)
     })
   })
 })

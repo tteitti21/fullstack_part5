@@ -24,7 +24,7 @@ const ShowBlogs = ({
       <p>All blogs:</p>
       <ul className='blogs'>
         {sortedBlogs.map(blog =>
-          <li key={blog.id} style={blogStyle}>
+          <li key={blog.id} style={blogStyle} className='li'>
             <div>
               <Togglable buttonLabel='view' title={blog.title}>
                 <Blog key={blog.id} blog={blog} handleLike={handleLike}
