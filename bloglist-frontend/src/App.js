@@ -15,13 +15,14 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
   const [messageType, setMessageType] = useState(null)
+  const [refresher, setRefresher] = useState(false)
 
   /** Fetches blogs */
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
     )  
-  }, [])
+  }, [refresher])
 
   /** Gets auth-token from localstorage during first render if possible. */
   useEffect(() => {
@@ -74,6 +75,7 @@ const App = () => {
   notificationHandler('Logged out', true)
  }
 
+ /** Handler for POST */
  const handlePost = async (event) => {
   event.preventDefault()
   
@@ -82,10 +84,10 @@ const App = () => {
   const response = blogService.postBlog(newBlog)
 
   if (response) {
-    const refreshBlogs = await blogService.getAll()
-    setBlogs(refreshBlogs)
+    setRefresher(!refresher)
     notificationHandler('New blog created', true)
   }
+  setRefresher(!refresher) // -------------!!!
  }
 
   /** Handler for LIKES */
@@ -105,8 +107,7 @@ const App = () => {
     const response = blogService.updateBlog(updatedBlog)
 
     if (response) {
-      const refreshBlogs = await blogService.getAll()
-      setBlogs(refreshBlogs)
+      setRefresher(!refresher)
       notificationHandler('your like has been added', true)
     } 
  }
@@ -119,8 +120,7 @@ const App = () => {
     try {
       const response = blogService.deleteBlog(blog[0])
       if (response) {
-        const refreshBlogs = await blogService.getAll()
-        setBlogs(refreshBlogs)
+        setRefresher(!refresher)
         notificationHandler('blog has been deleted', true)
       } 
     } catch (error) {
