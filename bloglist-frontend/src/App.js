@@ -87,7 +87,7 @@ const App = () => {
     setRefresher(!refresher)
     notificationHandler('New blog created', true)
   }
-  setRefresher(!refresher) // -------------!!!
+  setRefresher(!refresher)
  }
 
   /** Handler for LIKES */
@@ -139,7 +139,6 @@ const App = () => {
           handleRemove={handleRemove}
           createBlog={<BlogForm handlePost={handlePost}/>}
           Togglable={Togglable}
-          userID={user.id}
         />
         :
         <LoginForm handleLogin={handleLogin} username={username} password={password}

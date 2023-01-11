@@ -6,7 +6,6 @@ const ShowBlogs = ({
   createBlog, Togglable,
   handleLike,
   handleRemove,
-  userID,
 }) => {
   const blogStyle = {
     paddingTop: 10,
@@ -29,7 +28,7 @@ const ShowBlogs = ({
             <div>
               <Togglable buttonLabel='view' title={blog.title}>
                 <Blog key={blog.id} blog={blog} handleLike={handleLike}
-                  handleRemove={handleRemove} userID={userID} />
+                  handleRemove={handleRemove} userID={user.id} />
               </Togglable>
             </div>
           </li>
