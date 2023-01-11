@@ -12,7 +12,7 @@ const Blog = ({ blog, handleLike, handleRemove, userID }) => {
       <Button handler={handleLike} text='like' blog={blog}
         color='green' id='like-button' />
       <Button handler={handleRemove} text='remove' blog={blog}
-        color='red' visible={visible} />
+        color='red' visible={visible} id='remove-button' />
     </div>
   )
 }

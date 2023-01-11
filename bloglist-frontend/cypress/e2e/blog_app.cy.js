@@ -30,6 +30,12 @@ describe('Blog app', function () {
       password: 'salainensana'
     }
     cy.request('POST', 'http://localhost:3001/api/users/', user)
+    const user2 = {
+      name: 'Tino Wronguser',
+      username: 'TWT',
+      password: 'salainensana'
+    }
+    cy.request('POST', 'http://localhost:3001/api/users/', user2)
     cy.visit('http://localhost:3000')
   })
 
@@ -72,7 +78,8 @@ describe('Blog app', function () {
       cy.contains('cancel').click()
       cy.contains('new title')
     })
-    it.only('User can like a blog', function() {
+
+    it('User can like a blog', function() {
       cy.createBlog({
         title: 'new title',
         author: 'best author',
@@ -87,6 +94,44 @@ describe('Blog app', function () {
       .and('have.css', 'color', 'rgb(0, 128, 0)')
       cy.get('#likes')
       .should('contain', 1)
+    })
+
+    it('User can delete own blog', function() {
+      cy.createBlog({
+        title: 'new title',
+        author: 'best author',
+        url: 'shady url'
+      })
+      cy.contains('view').click()
+
+      cy.get('#remove-button').click()
+      cy.get('.success')
+      .should('contain', 'blog has been deleted')
+      .and('have.css', 'color', 'rgb(0, 128, 0)')
+      cy.get('.blogs')
+      .should('not.contain', 'new title')
+    })
+
+    it.only('User can NOT delete others blog', function() {
+      cy.createBlog({
+        title: 'new title',
+        author: 'best author',
+        url: 'shady url'
+      })
+      cy.contains('view').click()
+      cy.get('.blogs')
+      .should('contain', 'new title')
+      .get('#remove-button')
+      .and('not.have.css', 'display', 'none')
+
+      cy.get('#logout-button').click()
+      cy.login({ username: 'TWT', password: 'salainensana' })
+      cy.contains('view').click()
+
+      cy.get('.blogs')
+      .should('contain', 'new title')
+      .get('#remove-button')
+      .and('have.css', 'display', 'none')
     })
   })
 })

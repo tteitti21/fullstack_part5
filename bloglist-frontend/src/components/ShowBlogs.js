@@ -19,9 +19,10 @@ const ShowBlogs = ({
   return (
     <div>
       <h2>blogs</h2>
-      <p>Currenty logged in as {user.name}: <Button handler={handleLogout} text='logout' /></p>
+      <p>Currenty logged in as {user.name}: <Button handler={handleLogout} 
+        text='logout' id='logout-button'/></p>
       <p>All blogs:</p>
-      <ul>
+      <ul className='blogs'>
         {sortedBlogs.map(blog =>
           <li key={blog.id} style={blogStyle}>
             <div>
