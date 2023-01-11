@@ -25,14 +25,14 @@ const NotificationMessage = ({ message, type = false }) => {
   }
   else if (type) {
     return (
-      <div style={successStyle}>
+      <div className='success' style={successStyle}>
         {message}
       </div>
     )
   }
   else {
     return (
-      <div className="error" style={failStyle}>
+      <div className='error' style={failStyle}>
         {message}
       </div>
     )

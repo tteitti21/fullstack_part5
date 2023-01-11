@@ -87,7 +87,6 @@ const App = () => {
     setRefresher(!refresher)
     notificationHandler('New blog created', true)
   }
-  setRefresher(!refresher)
  }
 
   /** Handler for LIKES */
@@ -104,9 +103,11 @@ const App = () => {
       user: oldBlog[0].user,
       id: oldBlog[0].id
     }
-    const response = blogService.updateBlog(updatedBlog)
+    const response = await blogService.updateBlog(updatedBlog)
 
     if (response) {
+      const array = blogs.filter(b => b.id !== updatedBlog.id)
+      setBlogs(array.concat(updatedBlog))
       setRefresher(!refresher)
       notificationHandler('your like has been added', true)
     } 
@@ -115,10 +116,12 @@ const App = () => {
    /** Handler for DELETE */
    const handleRemove = async (event) => {
     event.preventDefault()
+
     const blog = blogs.filter(blog => blog.id === event.target.value)
+    
     if (window.confirm(`Delete blog ${blog[0].title} ?`)) {
     try {
-      const response = blogService.deleteBlog(blog[0])
+      const response = await blogService.deleteBlog(blog[0])
       if (response) {
         setRefresher(!refresher)
         notificationHandler('blog has been deleted', true)

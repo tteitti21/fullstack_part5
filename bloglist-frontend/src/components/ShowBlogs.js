@@ -16,7 +16,6 @@ const ShowBlogs = ({
   }
 
   const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes)
-
   return (
     <div>
       <h2>blogs</h2>
@@ -50,7 +49,6 @@ ShowBlogs.propTypes = {
   Togglable: PropTypes.elementType.isRequired,
   handleLike: PropTypes.func.isRequired,
   handleRemove: PropTypes.func.isRequired,
-  userID: PropTypes.string.isRequired,
 }
 
 export default ShowBlogs

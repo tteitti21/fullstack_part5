@@ -1,4 +1,4 @@
-const Button = ({ handler, text, blog = null, color, visible = '' }) => {
+const Button = ({ handler, text, blog = null, color, visible = '', id=null }) => {
   const buttonStyle = {
     paddingLeft: 1,
     borderWidth: 1,
@@ -9,7 +9,7 @@ const Button = ({ handler, text, blog = null, color, visible = '' }) => {
   }
 
   return (
-    <button value={blog ? blog.id : ''} onClick={handler} style={buttonStyle}>
+    <button id={id} value={blog ? blog.id : ''} onClick={handler} style={buttonStyle}>
       {text}
     </button>
   )
