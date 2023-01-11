@@ -87,13 +87,13 @@ describe('Blog app', function () {
       })
       cy.contains('view').click()
       cy.get('#likes')
-      .should('contain', 0)
+        .should('contain', 0)
       cy.get('#like-button').click()
       cy.get('.success')
-      .should('contain', 'your like has been added')
-      .and('have.css', 'color', 'rgb(0, 128, 0)')
+        .should('contain', 'your like has been added')
+        .and('have.css', 'color', 'rgb(0, 128, 0)')
       cy.get('#likes')
-      .should('contain', 1)
+        .should('contain', 1)
     })
 
     it('User can delete own blog', function() {
@@ -106,10 +106,10 @@ describe('Blog app', function () {
 
       cy.get('#remove-button').click()
       cy.get('.success')
-      .should('contain', 'blog has been deleted')
-      .and('have.css', 'color', 'rgb(0, 128, 0)')
+        .should('contain', 'blog has been deleted')
+        .and('have.css', 'color', 'rgb(0, 128, 0)')
       cy.get('.blogs')
-      .should('not.contain', 'new title')
+        .should('not.contain', 'new title')
     })
 
     it('User can NOT delete others blog', function() {
@@ -120,18 +120,18 @@ describe('Blog app', function () {
       })
       cy.contains('view').click()
       cy.get('.blogs')
-      .should('contain', 'new title')
-      .get('#remove-button')
-      .and('not.have.css', 'display', 'none')
+        .should('contain', 'new title')
+        .get('#remove-button')
+        .and('not.have.css', 'display', 'none')
 
       cy.get('#logout-button').click()
       cy.login({ username: 'TWT', password: 'salainensana' })
       cy.contains('view').click()
 
       cy.get('.blogs')
-      .should('contain', 'new title')
-      .get('#remove-button')
-      .and('have.css', 'display', 'none')
+        .should('contain', 'new title')
+        .get('#remove-button')
+        .and('have.css', 'display', 'none')
     })
 
     it.only('Order by highest like-value first', function() {
@@ -164,14 +164,11 @@ describe('Blog app', function () {
       cy.get('.li').eq(2).contains('like').click()
 
       cy.get('.li').eq(0)
-      .should('contain', 2)
+        .should('contain', 2)
       cy.get('.li').eq(1)
-      .should('contain', 1)
+        .should('contain', 1)
       cy.get('.li').eq(2)
-      .should('contain', 0)
+        .should('contain', 0)
     })
   })
 })
-
-
-  
